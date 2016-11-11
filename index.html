@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" ng-app="ngWebApp">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title ng-bind="title">Modern Business - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="css/angular-carousel.css" rel="stylesheet" type="text/css" />-->
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+    <!--<link href="css/custom.css" rel="stylesheet" >-->
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+        <!-- Our Website Content Goes Here -->
+        <div ng-controller="MainCtrl">
+            <div ng-include='"templates/header.html"'></div>
+            <div ng-view></div>
+            <div ng-include='"templates/footer.html"'></div>
+        </div>
+
+        <!-- Vendor: Javascripts -->
+        <!-- jQuery -->
+        <!--<script src="js/jquery.js"></script>-->
+
+        <!-- Bootstrap Core JavaScript -->
+        <!--<script src="js/bootstrap.min.js"></script>-->
+
+        <!-- Vendor: Angular, followed by our custom Javascripts -->
+        <script src="js/angularjs/1.5.0/angular.min.js"></script>
+        <script src="js/angularjs/1.5.0/angular-route.min.js"></script>
+        <script src="js/angularjs/1.5.0/angular-animate.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular-sanitize.js"></script>
+        <!-- load momentJS (required for angular-moment) -->
+        <!--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>-->
+
+        <!-- load angular-moment -->
+        <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>-->
+        
+        <!--<script src="js/angularjs/1.5.0/angular-touch.min.js"></script>-->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
+        <script src="js/ui-bootstrap-tpls-1.2.4.js"></script><!-- https://angular-ui.github.io/bootstrap/ -->
+        <!--<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>-->
+        <!-- Our Website Javascripts -->
+        <script src="app/app.js"></script>
+        <script src="app/data.js"></script>
+        <script src="app/directives.js"></script>
+        <script src="app/controllers.js"></script>
+        <!-- Include Directive For Pegination 
+            Ref URL : https://github.com/michaelbromley/angularUtils/tree/master/src/directives/pagination -->
+        <script src="js/dirPagination.js"></script>
+
+</body>
+
+</html>

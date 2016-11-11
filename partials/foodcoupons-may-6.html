@@ -1,0 +1,174 @@
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Food Coupons
+                    <small>Lunch / Breakfast</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#/">Home</a>
+                    </li>
+                    <li class="active">Food Coupons</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- section to show error messages after submitting order form -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div ng-show="submitStatusSuccess" class="alert alert-success" role="alert">
+                    <h4 class="text-center">
+                        <i class="fa fa-check-square-o"></i> <span class="label label-success">{{message}}</span>
+                    </h4>
+                </div>
+                <div ng-show="submitStatusError" class="alert alert-danger" role="alert">
+                    <h4 class="text-center">
+                        <i class="fa fa-exclamation-circle"></i> {{message}}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <style type="text/css">
+            th {
+                background-color: #337AB7;
+                color: white;
+            }
+        </style>
+        <div class="row">
+            <form name="orderForm" class="form-horizontal" role="form" ng-submit="saveOrder(orderForm.$valid)" novalidate>
+            <!-- Section For Order History -->
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <li class="list-group-item"><strong>Issued To</strong></li>
+                    <li class="list-group-item">
+                        <div ng-class="{
+                                          'has-error': orderForm.issuedTo.$invalid  && !orderForm.issuedTo.$pristine,
+                                          'has-success': orderForm.issuedTo.$valid && orderForm.issuedTo.$dirty
+                                        }">
+                            <input type="text" class="form-control" name="issuedTo" placeholder="Issued To" ng-model="order.issuedTo" focus required/>
+                            <div ng-if="orderForm.issuedTo.$invalid && !orderForm.issuedTo.$pristine">
+                                <span class="help-block" ng-show="orderForm.issuedTo.$error.required && !orderForm.issuedTo.$pristine">This field is required</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item"><strong>Issued By</strong></li>
+                    <li class="list-group-item">
+                        <div ng-class="{
+                          'has-error': orderForm.issuedBy.$invalid  && !orderForm.issuedBy.$pristine,
+                          'has-success': orderForm.issuedBy.$valid && orderForm.issuedBy.$dirty
+                        }">
+                            <input type="text" class="form-control" name="issuedBy" placeholder="Issued By" ng-model="order.issuedBy" required/>
+                        <div ng-if="orderForm.issuedBy.$invalid && !orderForm.issuedBy.$pristine">
+                            <span class="help-block" ng-show="orderForm.issuedBy.$error.required && !orderForm.issuedBy.$pristine">This field is required</span>
+                        </div>
+                        </div>
+                    </li>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Blog Search Well -->
+                <div class="panel panel-default">
+                  <!--<div class="panel-heading">Available Coupons</div>-->
+                    <table class="table table-bordered">
+                     <thead> 
+                        <tr>
+                            <th>Items</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="coupon in foodCoupons track by coupon.id">
+                            <th scope="row">{{coupon.title}}</th>
+                            <td>{{coupon.price | currency:"&#8377;"}}</td>
+                            <td><input type="text" ng-model="coupon.qty" class="form-control" onlyNumbers placeholder="Quantity" required/></td>
+                            <td>{{ coupon.price*coupon.qty  | currency:"&#8377;" }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="text-right" colspan="3">Grand Total :</th>
+                            <th>{{ order_total = getTotal()  | currency:"&#8377;" }}</th>
+                        </tr>
+                    </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Order Details</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span class="price">{{ order_total | currency:"&#8377;"}}</span>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Issued To :</strong> {{order.issuedTo}}</li>
+                        <li class="list-group-item"><strong>Issued By :</strong> {{order.issuedBy}}</li>
+                        <li class="list-group-item">
+                            <button ng-disabled="orderForm.$invalid"
+                                    class="btn btn-sm btn-primary"
+                                    type="submit">
+                                <i class="ace-icon fa fa-check"></i>&nbsp; Confirm
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </form>
+            <!-- /.form -->
+        </div>
+        <!-- /.row -->
+        <hr>
+
+        <div class="table-responsive">
+            <div class="panel panel-primary">
+              <div class="panel-heading clearfix"><h5 class="pull-left"><b>Order History</b></h5>
+                    <div class="sw-search pull-right" >
+                        <div class="nav-search" id="nav-search">
+                                <span class="input-icon">
+                                    <input placeholder="Filter orders list ..." class="nav-search-input form-control" ng-model="filterOrder" autocomplete="off" type="text">
+                                </span>
+                        </div>
+                    </div>
+                </div>
+              <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                <tr ng-show="orders.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No data found</td></tr>
+                <tr ng-hide="orders.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Loading</td></tr>
+                
+                <tr><th ng-repeat="c in gridColumns">{{c.text}}</th></tr>
+
+                <tr dir-paginate="c in orders | filter:filterOrder | orderBy:'-id' | itemsPerPage: pageSize" animate-on-change='c.issuedTo + c.issuedBy + c.total + c.created_at' ng-animate=" 'animate'">
+                    <td>{{c.order_id}}</td>
+                    <td>{{c.issuedTo}}</td>
+                    <td>
+                        <ul class="nav nav-pills">
+                            <li role="presentation" ng-repeat="item in c.items">
+                                <span class="label label-success">{{item.title}} &nbsp;<span class="badge">{{item.qty}}</span></span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>{{c.order_amt | currency:"&#8377;"}}</td>
+                    <td>{{c.issuedBy}}</td>
+                    <td>{{c.created_at | date:'EEEE, MMM d, y h:mm a'}}</td>
+                    <td style="width:100px">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteOrder(c);"></button>
+                        </div>
+                    </td>
+                </tr>
+                </table>
+                    <center>
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+                    </center>
+            </div>
+            </div>
+            </div>
+    </div>
+    <!-- /.container -->

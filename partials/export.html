@@ -1,0 +1,79 @@
+    <!-- Page Content -->
+    <div class="container"><!-- animate to top after submit contact form -->
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Export
+                    <small>Orders</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#/">Home</a>
+                    </li>
+                    <li class="active">Export Orders</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- section to show error messages after submitting contact form -->
+        <!--<div class="row">
+            <div class="col-lg-12">
+                <div ng-show="status" class="alert alert-success" role="alert">
+                    <h4 class="text-center">{{message}}</h4>
+                    <h4 class="text-center">
+                        <i class="fa fa-check-square-o"></i> <span class="label label-success">Thank You!</span>{{message}}
+                    </h4>
+                </div>
+                <div ng-hide="status" class="alert alert-danger" role="alert">
+                    <h4>
+                        <i class="fa fa-exclamation-circle"></i> {{message}}
+                    </h4>
+                </div>
+            </div>
+        </div>-->
+        <alert></alert>
+        <!-- /.row -->
+
+        <!-- Export Order Form -->
+        <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+        <div class="row">
+            <div class="col-md-8">
+                <!--<h3>Send us a Message</h3>-->
+                <form name="exportForm" class="form-horizontal" ng-submit="submitExportForm()" role="form" novalidate>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Year</label>
+                        <div class="col-xs-5">
+                            <select ng-model="export.year" ng-options="year.id as year.name for year in years" class="form-control" required>
+                                <option value="" selected="selected">Select Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Month</label>
+                        <div class="col-xs-5">
+                            <select ng-model="export.month" ng-options="month.id as month.name for month in months" class="form-control" required><option value="" selected="selected">Select Month</option></select>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="col-xs-3 control-label">Date</label>
+                        <div class="col-xs-5 date">
+                            <p>The time is {{ main.time }}</p>
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-2">
+                            <div class="btn-group">
+                                <button type="submit" ng-disabled="exportForm.$invalid" class="btn btn-primary"><i class="fa fa-check-circle" aria-hidden="true"></i> Export Ordrs</button>
+                            </div>  
+                        </div>
+                        <div class="col-xs-3">
+                            <div ng-bind-html="fileDownloadLink"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->

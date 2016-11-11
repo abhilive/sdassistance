@@ -1,0 +1,138 @@
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-center"><!-- Recharge / TopUp -->
+                    <!--<small>Instantly</small>-->
+                </h2>
+                <!--<ol class="breadcrumb">
+                    <li><a href="#/">Home</a>
+                    </li>
+                    <li class="active">Recharge</li>
+                </ol>-->
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Content Row -->
+        <div class="row">
+            <!--<div class="col-md-4">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Basic</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span class="price"><sup>$</sup>19<sup>99</sup></span>
+                        <span class="period">per month</span>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>1</strong> User</li>
+                        <li class="list-group-item"><strong>5</strong> Projects</li>
+                        <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
+                        <li class="list-group-item"><strong>10GB</strong> Disk Space</li>
+                        <li class="list-group-item"><strong>100GB</strong> Monthly Bandwidth</li>
+                        <li class="list-group-item"><a href="#" class="btn btn-primary">Sign Up!</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+            <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-primary text-center">
+                        <h4 class="text-center">
+                            <i class="fa fa-mobile fa-5x" aria-hidden="true"></i>
+                        </h4>
+                        <form name="quoteForm" novalidate>
+                            <div class="panel-body" class="animate-switch-container" ng-switch on="selection">
+                                <!-- First Step : Service Number -->
+                                <fieldset class="animate-switch" ng-switch-when="serviceNumber">
+                                        <h4>Service Number</h4>
+                                        <div class="form-group" ng-class="{
+                                          'has-error': quoteForm.$invalid  && !quoteForm.cellNo.$pristine,
+                                          'has-success': quoteForm.$valid && quoteForm.$dirty
+                                        }">
+                                        <input class="form-control" name="cellNo" type="text" placeholder="Mobile No." ng-minlength="10" maxlength="10" ng-model="quote.cellNo" valid-number required>
+                                        <div ng-if="quoteForm.$invalid && !quoteForm.cellNo.$pristine">
+                                        <span class="help-block" ng-show="quoteForm.cellNo.$error.required && !quoteForm.cellNo.$pristine">This field is required</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <!-- Second Step : Service Type -->
+                                <fieldset class="animate-switch" ng-switch-when="serviceType">
+                                    <h4>Srvice Type</h4>
+                                    <div class="form-group">
+                                        <label class="radio-inline" ng-repeat="service in quote.serviceType.availableOptions track by service.value">
+                                            <input type="radio" name="serviceT" ng-model="$parent.quote.serviceType.selectedOption.value" value="{{service.value}}">{{service.name}}
+                                        </label>
+                                    </div>
+                                </fieldset>
+                                <!-- Third Step : Operator -->
+                                <fieldset class="animate-switch" ng-switch-when="serviceOperator">
+                                    <h4>Operators</h4>
+                                    <div class="form-group">
+                                        <select class="form-control" ng-model="quote.operators.selectedOption" ng-init="quote.serviceOperator=operators[0]" ng-options="operator.name for operator in quote.operators.availableOptions track by operator.value"></select>
+                                    </div>
+                                </fieldset>
+                                <!-- Fourth Step : Recharge Amount -->
+                                <fieldset class="animate-switch" ng-switch-when="amount">
+                                    <h4>Recharge Amount</h4>
+                                    <div class="form-group">
+                                        <!--<label for="disabledSelect">Service Type</label>-->
+                                        <input class="form-control" name="amount" type="text" placeholder="Recharge" ng-minlength="1" minlength="1" ng-model="quote.amount" valid-number required>
+                                    </div>
+                                </fieldset>
+                                <!-- Final Step -->
+                                <fieldset class="animate-switch" ng-switch-when="thanks">
+                                    <div class="form-group">
+                                        <h4 class="text-center">
+                                            <i class="fa fa-exclamation-circle"></i> Thanks for recharge.
+                                        </h4>
+                                    </div>
+                                </fieldset>
+                                <!-- Previous & next step -->
+                                <!--<button class="btn btn-link" type="button" ng-click="goPrevious()" ng-disabled="!hasPreviousEnabled()">-->
+                                <button class="btn btn-link" type="button" ng-click="goPrevious()" ng-disabled="!hasPreviousEnabled()">
+                                    <i class="fa fa-3x fa-arrow-circle-o-left"></i>
+                                </button>
+                                <button class="btn btn-link" type="button" ng-click="goNext()" ng-disabled="!validQuote() || !hasNextEnabled()">
+                                    <i class="fa fa-3x fa-arrow-circle-o-right"></i>
+                                </button>
+                                <div class="col-md-12 alert alert-danger" ng-show="errorValidNumber" role="alert">
+                                    <h5>
+                                        <span ng-show="errorValidNumber"><i class="fa fa-exclamation-circle"></i> 
+                                            {{errorValidNumber}}
+                                            <p>Your number should be in 10 digits without leading 0.</p>
+                                        </span>
+                                    </h5>
+                                </div>
+                            </div><!-- /.panel-body -->
+                        </form>
+                    </div>
+                <!--</div>-->
+                <!-- END: Actual animated container. -->
+            </div>
+            <!--<div class="col-md-4">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ultra</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span class="price"><sup>$</sup>159<sup>99</sup></span>
+                        <span class="period">per month</span>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Unlimted</strong> Users</li>
+                        <li class="list-group-item"><strong>Unlimited</strong> Projects</li>
+                        <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
+                        <li class="list-group-item"><strong>10000GB</strong> Disk Space</li>
+                        <li class="list-group-item"><strong>Unlimited</strong> Monthly Bandwidth</li>
+                        <li class="list-group-item"><a href="#" class="btn btn-primary">Sign Up!</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->

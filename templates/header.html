@@ -1,0 +1,64 @@
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-show="isLoggedIn">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand text-logo" href="#/">sD Assistance</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" >
+                    <li ng-class="{ active: isActive('/recharge')}">
+                        <a href="#/recharge" class="disabled">Recharge</a>
+                    </li>
+                    <!--<li ng-class="{ active: isActive('/')}" >
+                        <a href="#/">Food Coupons</a>
+                    </li>-->
+                    <li ng-class="{ active: isActive('/food-coupons')}" uib-dropdown on-toggle="toggled(open)">
+                        <a href id="other-dropdown" uib-dropdown-toggle>Food Coupons <b class="caret"></b></a>
+                        <ul uib-dropdown-menu aria-labelledby="other-dropdown" role="menu">
+                            <li role="menuitem" ng-class="{ active: isActive('/food-coupons/create-order')}">
+                                <a href="#/food-coupons/create-order">Create Order</a>
+                            </li>
+                            <li role="menuitem" ng-class="{ active: isActive('/food-coupons/export')}">
+                                <a href="#/food-coupons/export">Export</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--<li ng-class="{ active: isActive('/export')}">
+                        <a href="#/export">Export</a>
+                    </li>-->
+                    <li ng-class="{ active: isActive('/others')}" uib-dropdown on-toggle="toggled(open)">
+                        <a href id="other-dropdown" uib-dropdown-toggle>
+                            <img width="20" height="20" src="https://avatars0.githubusercontent.com/u/8288640?v=3&amp;s=40" class="avatar" alt="@abhilive"> <b class="caret"></b>
+                        </a>
+                        <ul uib-dropdown-menu aria-labelledby="other-dropdown" role="menu">
+                            <li role="menuitem">
+                                <a data-target="#/others/faq" data-toggle="modal">Signed in as <strong ng-bind="userName"></strong></a>
+                            </li>
+                            <!--<li role="separator" class="divider"></li>
+                            <li role="menuitem" ng-class="{ active: isActive('/others/full-width')}">
+                                <a href="#/others/full-width">Profile</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li role="menuitem" ng-class="{ active: isActive('/profile/settings')}">
+                                <a href="#/profile/settings">Settings</a>
+                            </li>-->
+                            <li role="separator" class="divider"></li>
+                            <li role="menuitem">
+                                <a ng-click="logout()">Log out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
